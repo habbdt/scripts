@@ -5,6 +5,7 @@
 import sys
 import httpagentparser
 import json
+from collections import Counter
 
 input_file = sys.argv[1]
 
@@ -13,4 +14,6 @@ with open(input_file, 'r') as file:
         json_str = json.loads(line)
         for key in json_str:
             agent_version= json_str[key]
-            print(httpagentparser.simple_detect(agent_version))
+            parsed=httpagentparser.simple_detect(agent_version)
+            browser_version=parsed[1].split('.')[0]
+            print (browser_version)
